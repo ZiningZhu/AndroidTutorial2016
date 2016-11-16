@@ -20,6 +20,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 public class MainActivity extends AppCompatActivity {
 
     private EditText mInputText;
@@ -85,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 updateAdapterDataAndView();
                 mInputText.setText("");
+
+                sendRequestUpdateResult(mSentence);
             }
         });
 
@@ -112,6 +120,42 @@ public class MainActivity extends AppCompatActivity {
     private void updateAdapterDataAndView() {
         mListView.setAdapter(new MyMessagesAdapter(getApplicationContext(), mMessages));
     }
+
+    private void sendRequestUpdateResult(String mSentence) {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url("http://54.161.23.101/basicRequest")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    throw new IOException("Unexpected code "+response);
+                } else {
+                    final String responseText = "server:"+response.body().string();
+
+                    Log.d(TAG, responseText);
+
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mMessages.add(responseText);
+                            updateAdapterDataAndView();
+                        }
+                    });
+
+                }
+            }
+        });
+    }
+
     @Override
     protected void onResume() {
         String TAG = "onResume";

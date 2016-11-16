@@ -63,14 +63,14 @@ public class MyMessagesAdapter extends ArrayAdapter<String> {
         TextView leftFill = (TextView)convertView.findViewById(R.id.left_fill);
         TextView rightFill = (TextView)convertView.findViewById(R.id.right_fill);
         if (txt.length() < 3) {
-            Log.d(TAG, "Illegal String at position " + position);
+            Log.e(TAG, "Illegal String at position " + position);
             messageTV.setText(txt);
             return convertView;
         }
         if (txt.substring(0, 3).equals("me:")) {
             messageTV.setText(txt.substring(3));
-            messageTV.setBackgroundColor(mContext.getResources().getColor(R.color.myMessageBackground));
-            Log.d(TAG, "position="+position +"; msgTV text: " + txt.substring(3));
+            messageTV.setTextColor(mContext.getResources().getColor(R.color.myMessageText));
+            //Log.d(TAG, "position="+position +"; msgTV text: " + txt.substring(3));
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -79,18 +79,18 @@ public class MyMessagesAdapter extends ArrayAdapter<String> {
 
         }
         else if (txt.length() < 7) {
-            Log.d(TAG, "Illegal String at position " + position);
+            Log.e(TAG, "Illegal String at position " + position);
             messageTV.setText(txt);
             return convertView;
         }
         else if (txt.substring(0, 7).equals("server:")) {
             messageTV.setText(txt.substring(7));
-            messageTV.setBackgroundColor(mContext.getResources().getColor(R.color.serverMessageBackground));
+            messageTV.setTextColor(mContext.getResources().getColor(R.color.serverMessageText));
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     1);
-            leftFill.setLayoutParams(params);
+            rightFill.setLayoutParams(params);
         }
 
 

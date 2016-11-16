@@ -18,6 +18,7 @@ Write an Android terminal to chat with a server.
     - An Android Studio project contains: AndroidManifest.XML, layout and value XML files, Java Classes, and other material  
     - (5min) talk about the functionalities of the project folders  
     - (3min) Activity lifecycle: how the activity components work together and where to put each functionality  
+    ![basic-lifecycle](basic-lifecycle.png)  
 3. Basic Contents on Android side  
     1. Set up layout xml file.  
         - Talk about RelativeLayout, LinearLayout, and ListView. ListView shall not be placed within ScrollView  
@@ -32,10 +33,9 @@ Write an Android terminal to chat with a server.
         - XML add row view
         - MainActivity setAdapter()
         - Java define own adapter class, implement its getView() method   
-    Up till now you can see the demo: ![single-player](single-player-screenshot.png)
+    Up till now you can see the demo:   ![single-player](single-player-screenshot.png)
 4. (Optional) Further steps:  
     1. Shoot up a request to server.
-        - Define an AsyncTask class  
-        - Different components of AsyncTask  
+        - OkHttp: in `build.gradle` import it  
     2. Customizing View.  
     3. What if the network is slow? What if the Activity is unexpectedly closed when the other Thread is running?  

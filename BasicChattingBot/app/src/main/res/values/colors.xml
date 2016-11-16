@@ -6,4 +6,7 @@
     <color name="myMessageBackground">#AAFF80</color>
     <color name="serverMessageBackground">#80DFFF</color>
     <color name="textColor">#000000</color>
+
+    <color name="myMessageText">#000000</color>
+    <color name="serverMessageText">#0000cc</color>
 </resources>
