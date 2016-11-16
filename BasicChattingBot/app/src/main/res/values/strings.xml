@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">BasicChattingBot</string>
+    <string name="send_string">Send</string>
+</resources>
