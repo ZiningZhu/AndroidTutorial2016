@@ -20,24 +20,22 @@ Write an Android terminal to chat with a server.
     - (3min) Activity lifecycle: how the activity components work together and where to put each functionality  
 3. Basic Contents on Android side  
     1. Set up layout xml file.  
-        - RelativeLayout
-        - LinearLayout  
-        - ListView. It shall not be placed within ScrollView  
+        - Talk about RelativeLayout, LinearLayout, and ListView. ListView shall not be placed within ScrollView  
         - XML attributes and how to reference using `@`  
         - Resources: color, string, dimension, style, drawables  
     2. Wire up EditText widget and the Button widget.  
         - addTextChangedListener: save the current text to variable;    
         - onClickListener: Write to file and update ListView.  
-    3. Set up ListView and adapter.  
+    3. Preserve messages in onPause() and recover them in onResume()
+    4. Set up ListView and adapter.  
         - XML add ListView  
         - XML add row view
         - MainActivity setAdapter()
         - Java define own adapter class, implement its getView() method   
-    4. Shoot up a request to server.
+    Up till now you can see the demo: ![single-player](single-player-screenshot.png)
+4. (Optional) Further steps:  
+    1. Shoot up a request to server.
         - Define an AsyncTask class  
         - Different components of AsyncTask  
-
-4. (Optional) Further steps:  
-    1. Talk about customizing View.  
-    2. Preserve messages in onPause() and recover them in onResume()  
+    2. Customizing View.  
     3. What if the network is slow? What if the Activity is unexpectedly closed when the other Thread is running?  

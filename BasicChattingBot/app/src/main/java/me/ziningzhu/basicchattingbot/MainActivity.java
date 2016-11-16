@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.e(TAG, "IOException when writing memory file.");
                 }
                 updateAdapterDataAndView();
-
+                mInputText.setText("");
             }
         });
 
