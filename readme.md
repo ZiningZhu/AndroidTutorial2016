@@ -36,6 +36,10 @@ Write an Android terminal to chat with a server.
     Up till now you can see the demo:   ![single-player](single-player-screenshot.png)
 4. (Optional) Further steps:  
     1. Shoot up a request to server.
-        - OkHttp: in `build.gradle` import it  
+        - OkHttp: in `build.gradle` import it to Android project: place OkHttp and Okio in `app/libs/` then File-project structure-dependencies-Add file dependency-select  
+        - OkHttpClient and Request  
+        - Add Internet Permission  
+    Now the functionality is done.  
+    ![server-communication](server-communication-trial.png)
     2. Customizing View.  
     3. What if the network is slow? What if the Activity is unexpectedly closed when the other Thread is running?  
