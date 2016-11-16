@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">BasicChattingBot</string>
     <string name="send_string">Send</string>
+    <string name="clear_string">Clear Message History</string>
 </resources>

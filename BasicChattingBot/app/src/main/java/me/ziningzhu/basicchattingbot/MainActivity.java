@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText mInputText;
     private Button mSendButton;
+    private Button mClearButton;
     private String mSentence;
     private ArrayList<String> mMessages;
     private ListView mListView;
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         mMessages = new ArrayList<String>();
         mListView = (ListView)findViewById(R.id.my_list_view);
+
         mListAdapter = new MyMessagesAdapter(getApplicationContext(), mMessages);
         mListView.setAdapter(mListAdapter);
 
@@ -67,8 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 if (mMessages == null)
                     mMessages = new ArrayList<String>();
                 mMessages.add("me:"+mSentence);
-                mMessages.add(mSentence);
-                Log.d(TAG, "length of mMessages is " + mMessages.size());
+
 
                 try {
                     // Starts appending to the new file.
@@ -82,37 +83,38 @@ public class MainActivity extends AppCompatActivity {
                     i.printStackTrace();
                     Log.e(TAG, "IOException when writing memory file.");
                 }
-
-                // update the ListView. Already runs on UI Thread so no need to specify
-                mListAdapter.notifyDataSetChanged();
-                //mListView.refreshDrawableState();
-
-
+                updateAdapterDataAndView();
 
             }
         });
 
+        mClearButton = (Button)findViewById(R.id.clear_messages_button);
+        mClearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cleanUpPreviousMessages();
+            }
+        });
 
-        
     }
 
     private void cleanUpPreviousMessages() {
-        try {
-            // Starts appending to the new file.
-            File file = new File(getFilesDir(), "message_history.ser");
-            FileOutputStream fos = new FileOutputStream(file);
-            ObjectOutputStream out = new ObjectOutputStream(fos);
-            out.writeObject(null);
-            out.close();
-            fos.close();
-        } catch (IOException i) {
-            i.printStackTrace();
-            Log.e(TAG, "IOException when cleaning up memory file.");
-        }
 
+        // Starts appending to the new file.
+        File file = new File(getFilesDir(), "message_history.ser");
+        boolean deleted = file.delete();
+        mMessages.clear();
+
+        updateAdapterDataAndView();
+
+    }
+
+    private void updateAdapterDataAndView() {
+        mListView.setAdapter(new MyMessagesAdapter(getApplicationContext(), mMessages));
     }
     @Override
     protected void onResume() {
+        String TAG = "onResume";
         super.onResume();
         // Read file to get mMessages. Should be placed in onResume()
         try {
@@ -128,7 +130,11 @@ public class MainActivity extends AppCompatActivity {
             Log.e(TAG, "ClassNotFoundException when reading memory!");
         }
         if (mMessages != null && mMessages.size() > 0) {
-            mListAdapter.notifyDataSetChanged();
+            Log.d(TAG, "mMessages length: " + mMessages.size());
+            Log.d(TAG, "mMessages: " + mMessages.toString());
+
+            updateAdapterDataAndView();
+
         }
     }
     @Override

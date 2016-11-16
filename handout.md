@@ -17,10 +17,12 @@ Write an Android terminal to chat with a server.
 2. Start an Android Studio Project  
     - An Android Studio project contains: AndroidManifest.XML, layout and value XML files, Java Classes, and other material  
     - (5min) talk about the functionalities of the project folders  
+    - (3min) Activity lifecycle: how the activity components work together and where to put each functionality  
 3. Basic Contents on Android side  
     1. Set up layout xml file.  
         - RelativeLayout
         - LinearLayout  
+        - ListView. It shall not be placed within ScrollView  
         - XML attributes and how to reference using `@`  
         - Resources: color, string, dimension, style, drawables  
     2. Wire up EditText widget and the Button widget.  
@@ -37,5 +39,5 @@ Write an Android terminal to chat with a server.
 
 4. (Optional) Further steps:  
     1. Talk about customizing View.  
-    2. Talk about Activity Lifecycle and preserve messages in onPause() and recover them in onResume()  
+    2. Preserve messages in onPause() and recover them in onResume()  
     3. What if the network is slow? What if the Activity is unexpectedly closed when the other Thread is running?  

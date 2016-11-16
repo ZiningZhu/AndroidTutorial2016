@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="myMessageBackground">#AAFF80</color>
     <color name="serverMessageBackground">#80DFFF</color>
+    <color name="textColor">#000000</color>
 </resources>

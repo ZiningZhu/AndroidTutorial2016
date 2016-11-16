@@ -18,15 +18,38 @@ import java.util.ArrayList;
 
 public class MyMessagesAdapter extends ArrayAdapter<String> {
     private final Context mContext;
-    private ArrayList<String> messages;
     private final String TAG = "MyMessageAdapter";
+    private ArrayList<String> mMessages;
 
     public MyMessagesAdapter(Context context, ArrayList<String> messages) {
         super(context, R.layout.message_row, messages);
         mContext = context;
+        mMessages = messages;
+        //Log.d(TAG, "mMessages: " + mMessages.toString());
     }
+
+    @Override
+    public int getCount() {
+        if (mMessages == null) {
+            return 0;
+        } else {
+            return mMessages.size();
+        }
+    }
+
+    @Override
+    public String getItem(int i) {
+        try{
+            return mMessages.get(i);
+        } catch(IndexOutOfBoundsException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         if(convertView == null) {
             LayoutInflater inflater = (LayoutInflater) mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -35,7 +58,7 @@ public class MyMessagesAdapter extends ArrayAdapter<String> {
 
         // Put messages at position i to the convertView
         // Decide whether this message is sent by me or the server. Adjust positions and bg colors.
-        String txt = messages.get(position);
+        String txt = mMessages.get(position);
         TextView messageTV = (TextView)convertView.findViewById(R.id.message_text);
         TextView leftFill = (TextView)convertView.findViewById(R.id.left_fill);
         TextView rightFill = (TextView)convertView.findViewById(R.id.right_fill);
@@ -47,13 +70,18 @@ public class MyMessagesAdapter extends ArrayAdapter<String> {
         if (txt.substring(0, 3).equals("me:")) {
             messageTV.setText(txt.substring(3));
             messageTV.setBackgroundColor(mContext.getResources().getColor(R.color.myMessageBackground));
-            Log.d(TAG, "msgTV text: " + txt.substring(3));
+            Log.d(TAG, "position="+position +"; msgTV text: " + txt.substring(3));
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     1);
             leftFill.setLayoutParams(params);
 
+        }
+        else if (txt.length() < 7) {
+            Log.d(TAG, "Illegal String at position " + position);
+            messageTV.setText(txt);
+            return convertView;
         }
         else if (txt.substring(0, 7).equals("server:")) {
             messageTV.setText(txt.substring(7));
