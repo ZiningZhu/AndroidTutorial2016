@@ -77,18 +77,8 @@ public class MainActivity extends AppCompatActivity {
                 mMessages.add("me:"+mSentence);
 
 
-                try {
-                    // Starts appending to the new file.
-                    File file = new File(getFilesDir(), "message_history.ser");
-                    FileOutputStream fos = new FileOutputStream(file);
-                    ObjectOutputStream out = new ObjectOutputStream(fos);
-                    out.writeObject(mMessages);
-                    out.close();
-                    fos.close();
-                } catch (IOException i) {
-                    i.printStackTrace();
-                    Log.e(TAG, "IOException when writing memory file.");
-                }
+                writeMessagesToMemory();
+
                 updateAdapterDataAndView();
                 mInputText.setText("");
 
@@ -119,6 +109,23 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateAdapterDataAndView() {
         mListView.setAdapter(new MyMessagesAdapter(getApplicationContext(), mMessages));
+        writeMessagesToMemory();
+
+    }
+
+    private void writeMessagesToMemory() {
+        try {
+            // Starts appending to the new file.
+            File file = new File(getFilesDir(), "message_history.ser");
+            FileOutputStream fos = new FileOutputStream(file);
+            ObjectOutputStream out = new ObjectOutputStream(fos);
+            out.writeObject(mMessages);
+            out.close();
+            fos.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+            Log.e(TAG, "IOException when writing memory file.");
+        }
     }
 
     private void sendRequestUpdateResult(String mSentence) {

@@ -33,7 +33,8 @@ Write an Android terminal to chat with a server.
         - XML add row view
         - MainActivity setAdapter()
         - Java define own adapter class, implement its getView() method   
-    Up till now you can see the demo:   ![single-player](single-player-screenshot.png)
+    Up till now you can see the demo:   
+    ![single-player](single-player-screenshot.png)
 4. (Optional) Further steps:  
     1. Shoot up a request to server.
         - OkHttp: in `build.gradle` import it to Android project: place OkHttp and Okio in `app/libs/` then File-project structure-dependencies-Add file dependency-select  
@@ -43,3 +44,7 @@ Write an Android terminal to chat with a server.
     ![server-communication](server-communication-trial.png)
     2. Customizing View.  
     3. What if the network is slow? What if the Activity is unexpectedly closed when the other Thread is running?  
+    4. TODO -
+        - The first line of message shifted to center after the request is responded.  
+        - If there is no response from Internet, set a timeout mechanism (?) in OkHttp?
+        - Server side: use more intelligent chatting algorithms. Play around with gensim if possible.  

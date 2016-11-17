@@ -91,6 +91,11 @@ public class MyMessagesAdapter extends ArrayAdapter<String> {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     1);
             rightFill.setLayoutParams(params);
+            LinearLayout.LayoutParams param2 = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    0);
+            leftFill.setLayoutParams(param2);
         }
 
 
