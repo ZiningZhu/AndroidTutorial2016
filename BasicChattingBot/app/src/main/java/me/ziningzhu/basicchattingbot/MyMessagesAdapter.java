@@ -28,6 +28,11 @@ public class MyMessagesAdapter extends ArrayAdapter<String> {
         //Log.d(TAG, "mMessages: " + mMessages.toString());
     }
 
+    public void updateData(ArrayList<String> msgs) {
+        mMessages = msgs;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         if (mMessages == null) {
@@ -76,7 +81,11 @@ public class MyMessagesAdapter extends ArrayAdapter<String> {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     1);
             leftFill.setLayoutParams(params);
-
+            LinearLayout.LayoutParams param2 = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    0);
+            rightFill.setLayoutParams(param2);
         }
         else if (txt.length() < 7) {
             Log.e(TAG, "Illegal String at position " + position);

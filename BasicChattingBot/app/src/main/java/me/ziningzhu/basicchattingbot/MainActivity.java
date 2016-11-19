@@ -108,7 +108,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateAdapterDataAndView() {
-        mListView.setAdapter(new MyMessagesAdapter(getApplicationContext(), mMessages));
+        //mListView.setAdapter(new MyMessagesAdapter(getApplicationContext(), mMessages));
+        mListAdapter.updateData(mMessages);
         writeMessagesToMemory();
 
     }
