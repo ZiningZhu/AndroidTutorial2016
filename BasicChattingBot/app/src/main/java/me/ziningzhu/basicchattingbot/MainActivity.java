@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
     private void sendRequestUpdateResult(String mSentence) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("http://54.161.23.101/basicRequest")
+                .url("http://54.147.200.46/basicRequest")
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
